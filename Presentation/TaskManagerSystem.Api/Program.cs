@@ -1,3 +1,12 @@
+using Microsoft.Extensions.DependencyInjection;
+using TaskManagerSystem.Application.Interface.Repository;
+using TaskManagerSystem.Persistance.Context;
+using TaskManagerSystem.Persistance.Repository;
+using MediatR;
+using AutoMapper;
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +15,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<TaskManagerSystemContext>();
+builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+
 
 var app = builder.Build();
 
