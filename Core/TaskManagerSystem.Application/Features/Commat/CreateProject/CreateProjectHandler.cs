@@ -22,14 +22,14 @@ namespace TaskManagerSystem.Application.Features.Command.CreateProject
 
         public async Task<BaseResponse<CreateProductViewDto>> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
         {
-            // Request'ten doğrudan domain entity'sine mapleme
+ 
             var project = _mapper.Map<Project>(request);
-            project.CreateDate = DateTime.UtcNow;
+       
+       
 
-            // Veritabanına ekleme
             await _projectRepository.AddAsync(project);
 
-            // Eklenen proje verisinden DTO'ya mapleme
+  
             var responseViewModel = _mapper.Map<CreateProductViewDto>(project);
 
             return new SuccessResponse<CreateProductViewDto>(responseViewModel, "Proje başarıyla oluşturuldu.");

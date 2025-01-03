@@ -24,10 +24,10 @@ namespace TaskManagerSystem.Application.Features.Queries.QueryProject
         }
         public async Task<BaseResponse<List<GetAllProjectDto>>> Handle(GetAllProjectQuery request, CancellationToken cancellationToken)
         {
-            // Veritabanından tüm projeleri al
+            
             var projects = await _projectRepository.GetAllAysnc();
 
-            // Domain entity'den DTO'ya mapleme
+      
             var projectDtos = _mapper.Map<List<GetAllProjectDto>>(projects);
 
             return new SuccessResponse<List<GetAllProjectDto>>(projectDtos, "Projeler başarıyla getirildi.");

@@ -12,5 +12,7 @@ namespace TaskManagerSystem.Application.Interface.Repository
         Task<List<T>> GetAllAysnc();
         Task<T> GetByIdAsync(Guid Id);
         Task<T> AddAsync(T entity);
+        Task<T> UpdateAsync(T entity);
+        Task<T> DeleteAsync(Guid id);
     }
 }

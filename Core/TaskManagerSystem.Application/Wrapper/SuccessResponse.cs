@@ -3,10 +3,17 @@ using TaskManagerSystem.Domain;
 
 namespace Applicatino.Wrapper
 {
-    public class SuccessResponse<T> : BaseResponse<T> 
+    public class SuccessResponse<T> : BaseResponse<T>
     {
+
         public SuccessResponse(T data, string message)
             : base(true, message, data)
+        {
+        }
+
+
+        public SuccessResponse(string message)
+            : base(true, message, default)
         {
         }
     }

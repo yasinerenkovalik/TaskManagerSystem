@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Applicatino.Wrapper;
+using AutoMapper;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -20,11 +21,23 @@ namespace TaskManagerSystem.Application.Features.Commat.DeleteProject
             _mapper = mapper;
             _repository = repository;
         }
-        public Task<BaseResponse<DeleteProjectDto>> Handle(DeleteProjectCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<DeleteProjectDto>> Handle(DeleteProjectCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            
+            var project = await _repository.GetByIdAsync(request.id);
+
+            if (project == null)
+            {
+                return new ErrorResponse<DeleteProjectDto>(404, "Proje bulunamadı.");
+            }
+
+
+            await _repository.DeleteAsync(project);
+
+            return new SuccessResponse<DeleteProjectDto>("Proje başarıyla silindi.");
         }
+    }
 
  
     }
-}
+

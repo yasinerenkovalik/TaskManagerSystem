@@ -6,6 +6,7 @@ using MediatR;
 using TaskManagerSystem.Application.Features.Command.CreateProject;
 using TaskManagerSystem.Application.Features.Queries.QueryProject;
 using TaskManagerSystem.Application.Features.Queries.GetByIdProject;
+using TaskManagerSystem.Application.Features.Commat.DeleteProject;
 
 namespace TaskManagerSystem.Api.Controllers
 {
@@ -50,6 +51,19 @@ namespace TaskManagerSystem.Api.Controllers
         public async Task<IActionResult> GetById(Guid id)
         {
             var query = new GetProjectByIdQuery(id);
+            var response = await _mediator.Send(query);
+
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+
+            return BadRequest(response);
+        }
+        [HttpGet("delete")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var query = new DeleteProjectCommand(id);
             var response = await _mediator.Send(query);
 
             if (response.Success)

@@ -8,5 +8,6 @@ namespace TaskManagerSystem.Application.Dtos
 {
     public class DeleteProjectDto
     {
+        public Guid Id { get; set; }
     }
 }
