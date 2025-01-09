@@ -4,6 +4,11 @@ using TaskManagerSystem.Persistance.Context;
 using TaskManagerSystem.Persistance.Repository;
 using MediatR;
 using AutoMapper;
+using System.Reflection;
+using TaskManagerSystem.Application.Features.Command.CreateProject;
+using TaskManagerSystem.Application.Features.Commat.CreateProject;
+using TaskManagerSystem.Application.Wrapper;
+using Microsoft.AspNetCore.Hosting;
 
 
 
@@ -17,8 +22,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<TaskManagerSystemContext>();
-builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddMediatR(typeof(Program));
+
+//builder.Services.AddTransient<IRequestHandler<CreateProjectCommand,BaseResponse<CreateProjectCommantResponse>>,CreateProjectCommandHandler>();
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();

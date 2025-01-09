@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ using TaskManagerSystem.Application.Wrapper;
 
 namespace TaskManagerSystem.Application.Features.Queries.QueryProject
 {
-    public record GetAllProjectQuery() : IRequest<BaseResponse<List<GetAllProjectDto>>>; 
+    public class GetAllProjectQuery : IRequest<BaseResponse<IEnumerable<GetAllProjectDto>>>; 
   
 }

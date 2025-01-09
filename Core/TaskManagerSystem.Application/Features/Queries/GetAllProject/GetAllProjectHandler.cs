@@ -1,4 +1,4 @@
-﻿using Applicatino.Wrapper;
+﻿
 using AutoMapper;
 using MediatR;
 using System;
@@ -12,7 +12,7 @@ using TaskManagerSystem.Application.Wrapper;
 
 namespace TaskManagerSystem.Application.Features.Queries.QueryProject
 {
-    public class GetAllProjectHandler : IRequestHandler<GetAllProjectQuery, BaseResponse<List<GetAllProjectDto>>>
+    public class GetAllProjectHandler : IRequestHandler<GetAllProjectQuery, BaseResponse<IEnumerable<GetAllProjectDto>>>
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IMapper _mapper;
@@ -22,15 +22,15 @@ namespace TaskManagerSystem.Application.Features.Queries.QueryProject
             _projectRepository = projectRepository;
             _mapper = mapper;
         }
-        public async Task<BaseResponse<List<GetAllProjectDto>>> Handle(GetAllProjectQuery request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<IEnumerable<GetAllProjectDto>>> Handle(GetAllProjectQuery request, CancellationToken cancellationToken)
         {
             
             var projects = await _projectRepository.GetAllAysnc();
 
       
-            var projectDtos = _mapper.Map<List<GetAllProjectDto>>(projects);
+            var projectDtos = _mapper.Map<IEnumerable<GetAllProjectDto>>(projects);
 
-            return new SuccessResponse<List<GetAllProjectDto>>(projectDtos, "Projeler başarıyla getirildi.");
+            return new BaseResponse<IEnumerable<GetAllProjectDto>>(true, "Projeler başarıyla getirildi.",null,null);
         }
     }
 }

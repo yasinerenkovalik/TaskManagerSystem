@@ -7,6 +7,9 @@ using TaskManagerSystem.Application.Features.Command.CreateProject;
 using TaskManagerSystem.Application.Features.Queries.QueryProject;
 using TaskManagerSystem.Application.Features.Queries.GetByIdProject;
 using TaskManagerSystem.Application.Features.Commat.DeleteProject;
+using TaskManagerSystem.Application.Dtos;
+using TaskManagerSystem.Application.Features.Commat.CreateProject;
+using TaskManagerSystem.Application.Wrapper;
 
 namespace TaskManagerSystem.Api.Controllers
 {
@@ -25,7 +28,7 @@ namespace TaskManagerSystem.Api.Controllers
         [Route("create")]
         public async Task<IActionResult> CreateProject([FromBody] CreateProjectCommand command)
         {
-            var response = await _mediator.Send(command);
+            var response = await _mediator.Send<BaseResponse<CreateProjectCommantResponse>>(command);
 
             if (response.Success)
             {
@@ -48,9 +51,9 @@ namespace TaskManagerSystem.Api.Controllers
             return BadRequest(response);
         }
         [HttpGet("get-by-id")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> GetById(GetProjectByIdQuery query)
         {
-            var query = new GetProjectByIdQuery(id);
+            
             var response = await _mediator.Send(query);
 
             if (response.Success)

@@ -4,14 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskManagerSystem.Application.Dtos
+namespace TaskManagerSystem.Application.Features.Commat.CreateProject
 {
-    //TODO DİKKAT ET
-    public class CreateProductViewDto
+    public class CreateProjectCommantResponse
     {
-       
         public string Title { get; set; }
         public string Description { get; set; }
- 
     }
 }
