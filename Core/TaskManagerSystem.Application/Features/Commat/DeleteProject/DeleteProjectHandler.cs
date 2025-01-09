@@ -1,4 +1,4 @@
-﻿using Applicatino.Wrapper;
+﻿
 using AutoMapper;
 using MediatR;
 using System;
@@ -28,13 +28,13 @@ namespace TaskManagerSystem.Application.Features.Commat.DeleteProject
 
             if (project == null)
             {
-                return new ErrorResponse<DeleteProjectDto>(404, "Proje bulunamadı.");
+                return new BaseResponse<DeleteProjectDto>(true, "geldi", new DeleteProjectDto(), null);
             }
+            
 
+            await _repository.DeleteAsync(project.Id);
 
-            await _repository.DeleteAsync(project);
-
-            return new SuccessResponse<DeleteProjectDto>("Proje başarıyla silindi.");
+            return new BaseResponse<DeleteProjectDto>(true, "geldi", new DeleteProjectDto(), null);
         }
     }
 

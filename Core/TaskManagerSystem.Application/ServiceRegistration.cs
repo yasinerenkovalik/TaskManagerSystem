@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManagerSystem.Application.Interface.Repository;
+using MediatR;
 
 namespace TaskManagerSystem.Application
 {
@@ -12,8 +13,8 @@ namespace TaskManagerSystem.Application
     {
         public static void AddApplicationService(this IServiceCollection serviceCollection )
         {
-           
 
+          
         }
 
     }

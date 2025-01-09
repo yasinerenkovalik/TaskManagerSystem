@@ -9,5 +9,8 @@ using TaskManagerSystem.Application.Wrapper;
 
 namespace TaskManagerSystem.Application.Features.Queries.GetByIdProject
 {
-    public record GetProjectByIdQuery(Guid Id) : IRequest<BaseResponse<GetByIdProjectDto>>;
+    public class GetProjectByIdQuery : IRequest<BaseResponse<GetByIdProjectDto>>
+    {
+        public Guid Id { get; set; }
+    }
 }

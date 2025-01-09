@@ -1,4 +1,4 @@
-﻿using Applicatino.Wrapper;
+﻿
 using AutoMapper;
 using MediatR;
 using System;
@@ -26,11 +26,11 @@ namespace TaskManagerSystem.Application.Features.Queries.GetByIdProject
         {
             var project = await _projectRepository.GetByIdAsync(request.Id);
             if (project == null) {
-                return new ErrorResponse<GetByIdProjectDto>(404,"proje bulunamadı");
+                return new BaseResponse<GetByIdProjectDto>(true,"geldi",new GetByIdProjectDto(),null);
             
             }
             var propjectDto=_mapper.Map<GetByIdProjectDto>(project);
-            return new SuccessResponse<GetByIdProjectDto>(propjectDto, "proje başatıyla getirildi");
+            return new BaseResponse<GetByIdProjectDto>(true, "geldi", new GetByIdProjectDto(), null);
         }
     }
 }
